@@ -1,62 +1,74 @@
-/******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
-******************************************/
-
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
-
-
-/***
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
+//list of quotes//
 
 quotes = [
-  {"Life is about making an impact, not making an income. --Kevin Kruse"},
-  {"Whatever the mind of man can conceive and believe, it can achieve. –Napoleon Hill"},
-  {"Strive not to be a success, but rather to be of value. –Albert Einstein"},
-  {". I attribute my success to this: I never gave or took any excuse. –Florence Nightingale"},
-  {},
+  {quote: "Life is about making an impact, not making an income.",
+  source: "Kevin Kruse",
+  citation: "www.google.com"},
+  {quote: "Whatever the mind of man can conceive and believe, it can achieve.",
+  source: "Napoleon Hill",
+  year: 1590},
+  {quote: "Strive not to be a success, but rather to be of value.",
+  source: "Albert Einstein"},
+  {quote: "I attribute my success to this: I never gave or took any excuse.",
+  source: "Florence Nightingale"},
+  {quote: "You miss 100% of the shots you don’t take.",
+  source: "Wayne Gretzky"},
+  {quote: "The most difficult thing is the decision to act, the rest is merely tenacity.",
+  source: "Amelia Earhart"},
+  {quote: "Every strike brings me closer to the next home run.",
+  source: "Babe Ruth"},
+  {quote: "Definiteness of purpose is the starting point of all achievement.",
+  source: "W. Clement Stone"},
+  {quote: "Life is 10% what happens to me and 90% of how I react to it.",
+  source: "Charles Swindoll"},
+  {quote: "An unexamined life is not worth living.",
+  source: "Socrates"}
 ]
 
+//testing to see every quotes in console log//
+
+for (var i = 0; i < quotes.length; i +=1) {
+  var quoteO = quotes[i]
+  for (var prop in quoteO) {
+  console.log(quoteO.quote)
+  }
+}
+
+//getRandomQuote function will return a random object selected within the quotes array//
+
+function getRandomQuote() {
+  var randNum = Math.floor(Math.random() * 10)
+  var quoteOb = quotes[randNum]
+  return quoteOb
+}
+
+//testing to see if function works and returns the expected value//
+
+console.log("This is the random quote: " + getRandomQuote().quote + " by " + getRandomQuote().source)
+
+//printQuote function will print quote and its properities in html onto the webpage//
+
+function printQuote() {
+  var obj = getRandomQuote(); //obj is object within array of quotes
+  var html = "";
+
+  html = '<p class="quote">' + obj.quote + '</p>' + '<p class="source">' + obj.source
+
+  if (obj.citation !== undefined) {
+    html += '<span class = "citation">' + obj.citation + '</span>'
+  }
+  if (obj.year !== undefined) {
+    html += '<span class = "year">' + obj.year + '</span>'
+  }
+
+  html += '</p>'
+  document.getElementById('quote-box').innerHTML = html;
+}
+
+printQuote();
 
 /***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
-
-
-
-
-/***
-  Create the `printQuote` function to:
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string.
-***/
-
-
-
-
-/***
-  When the "Show another quote" button is clicked, the event listener
-  below will be triggered, and it will call, or "invoke", the `printQuote`
-  function. So do not make any changes to the line of code below this
-  comment.
+    When "Show another quote" button is clicked, a new quote will be shown on webpage
 ***/
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
